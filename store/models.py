@@ -1,3 +1,4 @@
+from ast import Index
 from django.db import models
 #no id field because django creates it automatically
 # sku = models.CharField(max_length=10, primary_key=True) 
