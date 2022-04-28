@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 # no id field because django creates it automatically
 # sku = models.CharField(max_length=10, primary_key=True)
@@ -28,14 +29,17 @@ class Product(models.Model):
     title = models.CharField(max_length=255)  # varchar(255)
     # search engine optimization technique
     slug = models.SlugField()
-    description = models.TextField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField(null=True, blank=True)
+    unit_price = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        validators=[MinValueValidator(1)])
     # monetary values should always be decimal field
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now=True)
     # auto_now_add only stores at time of creation
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
-    promotions = models.ManyToManyField(Promotion)
+    promotions = models.ManyToManyField(Promotion, blank=True)
     # plural because a product can have many promotions.
 
     def __str__(self) -> str:
