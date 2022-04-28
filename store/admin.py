@@ -1,9 +1,9 @@
-
 from django.contrib import admin, messages
 from django.db.models.aggregates import Count
 from django.urls import reverse
 from django.utils.html import format_html
 from . import models
+
 # Register your models here.
 
 
